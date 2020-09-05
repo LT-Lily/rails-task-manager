@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-   before_action :set_Task, only: [:show, :edit, :update, :destroy]
+   before_action :set_task, only: [:show, :edit, :update, :destroy]
     # READ ALL
     def index
         @tasks = Task.all
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
         @task = Task.new(task_params) # create with permitted params
         @task.save
 
-        redirect_to task_show_path(@task)
+        redirect_to task_path(@task)
     end
     # READ ONE
     def show
@@ -25,7 +25,15 @@ class TasksController < ApplicationController
     end
 
     def update
-        @task.update(params[:task])
+        @task.update(task_params)
+    end
+
+    # DELETE ONE
+
+    def destroy
+     @task = @task.destroy
+
+    redirect_to task_path(@task)
     end
 
     private
@@ -34,8 +42,8 @@ class TasksController < ApplicationController
         params.require(:task).permit(:title, :details, :completed)
     end
 
-    def set_tasks
+    def set_task
         @task = Task.find(params[:id])
     end
-    # DELETE ONE
+
 end

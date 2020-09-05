@@ -1,8 +1,13 @@
 <h1> Tasks To Do: <h1>
 <ul> 
     <% @tasks.each do |task| %>
-    <li><%= link_to task.title, task_show_path(task) %></li>
+    <li><%= link_to task.title, task_path(task)  %></li>
+   <%#= <i class="far fa-trash-alt"><%= link_to 
+            task_path(@task),
+            method: :delete,
+            data: { confirm: "Are you sure?"}  task_path(task)%>
     <%end%>
 </ul>
+<%= link_to "Add a task", tasks_new_path %> 
 
 
